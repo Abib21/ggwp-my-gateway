@@ -26,25 +26,21 @@ conn.commit()
 # --- UTILS ---
 def get_main_keyboard():
     return InlineKeyboardMarkup([
+        [InlineKeyboardButton("🆔 REGISTER AKAUN (KLIK SINI)", callback_data="show_register")],
+        [InlineKeyboardButton("🎁 CLAIM BONUS 27% EXTRA", callback_data="show_bonus")],
         [
-            InlineKeyboardButton("🆔 Register", callback_data="show_register"),
-            InlineKeyboardButton("🚀 Terima Deposit", callback_data="show_deposit")
+            InlineKeyboardButton("🚀 DEPO", callback_data="show_deposit"),
+            InlineKeyboardButton("💰 PROMO", callback_data="show_all_promos")
         ],
         [
-            InlineKeyboardButton("🎁 Claim Bonus 27%", callback_data="show_bonus"),
-            InlineKeyboardButton("💰 Bonus Tersedia", callback_data="show_all_promos")
+            InlineKeyboardButton("🎰 GAME LIST", callback_data="show_game_list"),
+            InlineKeyboardButton("🎮 LINK GAME", callback_data="show_links")
         ],
         [
-            InlineKeyboardButton("🎰 List Game", callback_data="show_game_list"),
-            InlineKeyboardButton("📢 Channel Bukti Cuci", url="https://t.me/ggwp888channel")
+            InlineKeyboardButton("💬 CHAT AMOI", callback_data="show_chat_options"),
+            InlineKeyboardButton("📢 BUKTI CUCI", url="https://t.me/ggwp888channel")
         ],
-        [
-            InlineKeyboardButton("💬 Chat Amoi Sini", callback_data="show_chat_options"),
-            InlineKeyboardButton("🎮 Link Game", callback_data="show_links")
-        ],
-        [
-            InlineKeyboardButton("❌ List Banned Game ❌", callback_data="show_banned_games")
-        ]
+        [InlineKeyboardButton("❌ LIST BANNED GAME ❌", callback_data="show_banned_games")]
     ])
 
 def get_greeting():
