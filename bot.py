@@ -256,7 +256,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "⚜️ **JOKER**\n"
             "🙅 Powerbar\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "⚠️ *Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!*"
+            "⚠️ *Game di atas tidak di benarkan untuk bermain, jika di dapati maka point akan burn*"
         )
         keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
