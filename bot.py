@@ -60,7 +60,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ],
         [
             InlineKeyboardButton("🎰 Game Gacor (Signal)", url="https://t.me/GGWP_Signal"),
-            InlineKeyboardButton("📢 Channel Testimonial", url="https://t.me/GGWP_Review")
+            InlineKeyboardButton("📢 Channel Bukti cuci", url="https://t.me/ggwp888channel")
         ],
         [
             InlineKeyboardButton("💬 LiveChat / WhatsApp", url="https://ggwp.com/support"),
