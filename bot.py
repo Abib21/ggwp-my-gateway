@@ -19,8 +19,8 @@ cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY,
         referrer INTEGER
-    )
-    """)
+)
+""")
 conn.commit()
 
 # --- UTILS ---
@@ -47,26 +47,23 @@ def get_main_keyboard():
         ]
     ])
 
-# --- HANDLERS ---
-
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.effective_user
-    user_id = user.id
-
+def get_greeting():
     my_tz = pytz.timezone('Asia/Kuala_Lumpur')
     my_time = datetime.now(my_tz).hour
-    greeting = "Selamat Pagi" if 5 <= my_time < 12 else "Selamat Petang" if 12 <= my_time < 18 else "Selamat Malam"
+    if 5 <= my_time < 12:
+        return "Selamat Pagi"
+    elif 12 <= my_time < 18:
+        return "Selamat Petang"
+    else:
+        return "Selamat Malam"
 
-    cursor.execute("SELECT user_id FROM users WHERE user_id=?", (user_id,))
-    if not cursor.fetchone():
-        cursor.execute("INSERT INTO users (user_id) VALUES (?)", (user_id,))
-        conn.commit()
-
-    welcome_msg = (
+def get_welcome_msg(first_name):
+    greeting = get_greeting()
+    return (
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n"
         "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
-        f"*{greeting}, BOSS {user.first_name.upper()}!* 👑🇲🇾\n"
+        f"*{greeting}, BOSS {first_name.upper()}!* 👑🇲🇾\n"
         "Selamat datang ke platform paling 'steady' di Malaysia.\n\n"
         "🎁 **PROMOSI KHAS MEMBER BARU**\n"
         "┌───────────────────┐\n"
@@ -86,7 +83,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "━━━━━━━━━━━━━━━━━━━━━\n\n"
         "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
     )
-    await update.message.reply_text(welcome_msg, reply_markup=get_main_keyboard(), parse_mode='Markdown')
+
+# --- HANDLERS ---
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+
+    cursor.execute("SELECT user_id FROM users WHERE user_id=?", (user.id,))
+    if not cursor.fetchone():
+        cursor.execute("INSERT INTO users (user_id) VALUES (?)", (user.id,))
+        conn.commit()
+
+    await update.message.reply_text(
+        get_welcome_msg(user.first_name),
+        reply_markup=get_main_keyboard(),
+        parse_mode='Markdown'
+    )
 
 async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -100,7 +112,11 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ],
             [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
         ])
-        await query.edit_message_text(text="👑 **Join GGWP** 👑\n\nPilih platform untuk Join, Bossku!", reply_markup=keyboard)
+        await query.edit_message_text(
+            text="👑 **Join GGWP** 👑\n\nPilih platform untuk Join, Bossku!",
+            reply_markup=keyboard,
+            parse_mode='Markdown'
+        )
 
     elif query.data == "show_chat_options":
         keyboard = InlineKeyboardMarkup([
@@ -110,16 +126,22 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ],
             [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
         ])
-        await query.edit_message_text(text="💬 HUBUNGI AMOI GGWP 💬\n\nSila pilih platform untuk chat dengan kami!", reply_markup=keyboard)
+        await query.edit_message_text(
+            text="💬 **HUBUNGI AMOI GGWP** 💬\n\nSila pilih platform untuk chat dengan kami!",
+            reply_markup=keyboard,
+            parse_mode='Markdown'
+        )
 
-elif query.data == "show_game_list":
+    elif query.data == "show_game_list":
         game_list_text = (
             "👾🎮 **GGWP ROYAL CASINO GAME LIST** 🎮👾\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "🎰 **Mega888** (🔥 *HOT*)\n"
-            "🎰 **Pussy888** (🔥 *HOT*)\n"
-            "🎰 **EVO888** (🔥 *HOT*)\n"
-            "🎰 **918 Kiss ORI** (🔥 *HOT*)\n\n"
+            "🔥 **TOP GACOR HARI INI:**\n"
+            "🎰 **Mega888** 🔥 *HOT*\n"
+            "🎰 **Pussy888** 🔥 *HOT*\n"
+            "🎰 **EVO888** 🔥 *HOT*\n"
+            "🎰 **918 Kiss ORI** 🔥 *HOT*\n\n"
+            "💎 **POPULAR GAMES:**\n"
             "✨ 918 Kiss Kaya\n"
             "✨ LPE (Lucky Palace)\n"
             "✨ Newtown\n"
@@ -127,12 +149,12 @@ elif query.data == "show_game_list":
             "✨ Live22\n"
             "✨ Joker123\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "👑 *Pilih Game & Mulai Bermain Sekarang!* 👑"
+            "👑 *Pilih Game & Hantam Jackpot Sekarang!* 👑"
         )
         back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
 
-elif query.data == "show_bonus":
+    elif query.data == "show_bonus":
         keyboard = InlineKeyboardMarkup([
             [
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20nak%20claim%20bonus%2027%25%20%F0%9F%A5%B0%F0%9F%8E%81%F0%9F%92%B0"),
@@ -140,7 +162,11 @@ elif query.data == "show_bonus":
             ],
             [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
         ])
-        await query.edit_message_text(text="🎁 CLAIM BONUS 27% 🎁\n\nHubungi kami untuk claim bonus anda!", reply_markup=keyboard)
+        await query.edit_message_text(
+            text="🎁 **CLAIM BONUS 27%** 🎁\n\nHubungi kami untuk claim bonus anda!",
+            reply_markup=keyboard,
+            parse_mode='Markdown'
+        )
 
     elif query.data == "show_all_promos":
         promo_text = (
@@ -158,7 +184,7 @@ elif query.data == "show_bonus":
 
     elif query.data == "show_deposit":
         deposit_text = (
-            "🚀  TERIMA DEPOSIT 🚀\n"
+            "🚀 **TERIMA DEPOSIT** 🚀\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
             "💳 **TERIMA DEPOSIT SEMUA BANK**\n"
             "💰 **DUITNOW / QR**\n"
@@ -175,94 +201,69 @@ elif query.data == "show_bonus":
         keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
         await query.edit_message_text(text=deposit_text, reply_markup=keyboard, parse_mode='Markdown')
 
-elif query.data == "show_links":
+    elif query.data == "show_links":
         links_text = (
             "🎰 **LIST LINK GAME** 🎰\n"
-            "____________________________\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━\n\n"
             "✨ **918KISS**\n"
-            "Android & iOS: [KLIK SINI](https://yop1.918kiss.com/)\n"
-            "____________________________\n"
+            "Android & iOS: [KLIK SINI](https://yop1.918kiss.com/)\n\n"
             "✨ **MEGA888**\n"
-            "Android & iOS: [KLIK SINI](https://m.mega166.com/mega/index.html)\n"
-            "____________________________\n"
+            "Android & iOS: [KLIK SINI](https://m.mega166.com/mega/index.html)\n\n"
             "✨ **PUSSY888**\n"
-            "Android & iOS: [KLIK SINI](https://ytl.pussy888.com/)\n"
-            "____________________________\n"
+            "Android & iOS: [KLIK SINI](https://ytl.pussy888.com/)\n\n"
             "✨ **LIVE22**\n"
             "Android: [KLIK SINI](https://live22474.com/Login)\n"
-            "iOS: [KLIK SINI](https://botanica22.com/Login)\n"
-            "____________________________\n"
+            "iOS: [KLIK SINI](https://botanica22.com/Login)\n\n"
             "✨ **918KAYA**\n"
-            "Android & iOS: [KLIK SINI](http://download22.da31889.com/)\n"
-            "____________________________\n"
+            "Android & iOS: [KLIK SINI](http://download22.da31889.com/)\n\n"
             "✨ **JOKER**\n"
-            "Android & iOS: [KLIK SINI](https://www.jokerapp888a.net/)\n"
-            "____________________________\n"
+            "Android & iOS: [KLIK SINI](https://www.jokerapp888a.net/)\n\n"
             "✨ **NEWTOWN CASINO**\n"
             "Android: [KLIK SINI](https://cdn.newmax11.com/mobile.html)\n"
-            "iOS: [KLIK SINI](https://www.nbig33.com/)\n"
-            "____________________________\n"
+            "iOS: [KLIK SINI](https://www.nbig33.com/)\n\n"
             "✨ **EVO888**\n"
             "Android & iOS: [KLIK SINI](https://d.evo366.com/)\n\n"
-            "____________________________\n"
-            "⬅️ *Tekan butang di bawah untuk kembali*"
+            "━━━━━━━━━━━━━━━━━━━━━"
         )
         back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
         await query.edit_message_text(
-            text=links_text, 
-            reply_markup=back_keyboard, 
-            parse_mode='Markdown', 
+            text=links_text,
+            reply_markup=back_keyboard,
+            parse_mode='Markdown',
             disable_web_page_preview=True
         )
 
-    elif query.data == "show_game_list":
-        game_list_text = (
-            "👾🎮 **GGWP ROYAL CASINO GAME LIST** 🎮👾\n"
+    elif query.data == "show_banned_games":
+        banned_text = (
+            "❌ **LIST BANNED GAMES** ❌\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "🔥 **TOP GACOR HARI INI:**\n"
-            "🎰 **Mega888** (🔥 *HOT*)\n"
-            "🎰 **Pussy888** (🔥 *HOT*)\n"
-            "🎰 **EVO888** (🔥 *HOT*)\n"
-            "🎰 **918 Kiss ORI** (🔥 *HOT*)\n\n"
-            "💎 **POPULAR GAMES:**\n"
-            "✨ 918 Kiss Kaya\n"
-            "✨ LPE (Lucky Palace)\n"
-            "✨ Newtown\n"
-            "✨ GreatWall\n"
-            "✨ Live22\n"
-            "✨ Joker123\n\n"
+            "🚫 *Game-game berikut TIDAK layak untuk bonus:*\n\n"
+            "❌ Semua Live Casino Games\n"
+            "❌ Baccarat\n"
+            "❌ Roulette\n"
+            "❌ Blackjack\n"
+            "❌ Dragon Tiger\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "👑 *Pilih Game & Hantam Jackpot Sekarang!* 👑"
+            "⚠️ *Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!*"
         )
-        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+        await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
+
     elif query.data == "back_to_main":
         user = update.effective_user
-        my_tz = pytz.timezone('Asia/Kuala_Lumpur')
-        my_time = datetime.now(my_tz).hour
-        greeting = "Selamat Pagi" if 5 <= my_time < 12 else "Selamat Petang" if 12 <= my_time < 18 else "Selamat Malam"
-        
-        # PENTING: Masukkan balik mesej penuh piala di sini
-        welcome_msg = (
-            "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n"
-            "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
-            "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
-            f"*{greeting}, BOSS {user.first_name.upper()}!* 👑🇲🇾\n"
-            "Selamat datang ke platform paling 'steady' di Malaysia.\n\n"
-            "🎁 **PROMOSI KHAS MEMBER BARU**\n"
-            "┌───────────────────┐\n"
-            " 💵 **MIN DEPOSIT** ⇢ *RM20*\n"
-            " 💰 **CLAIM BONUS** ⇢ *27% EXTRA*\n"
-            " 💳 **METHOD** ⇢ *BANKIN / DUITNOW*\n"
-            "└───────────────────┘\n\n"
-            "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
+        await query.edit_message_text(
+            text=get_welcome_msg(user.first_name),
+            reply_markup=get_main_keyboard(),
+            parse_mode='Markdown'
         )
-        await query.edit_message_text(text=welcome_msg, reply_markup=get_main_keyboard(), parse_mode='Markdown')
 
 # --- MAIN ---
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(handle_callback))
-    print("--- GGWP MALAYSIA BOT IS RUNNING ---")
-    application.run_polling()
+    if not BOT_TOKEN:
+        print("ERROR: BOT_TOKEN not found!")
+    else:
+        application = ApplicationBuilder().token(BOT_TOKEN).build()
+        application.add_handler(CommandHandler("start", start))
+        application.add_handler(CallbackQueryHandler(handle_callback))
+        print("--- GGWP MALAYSIA BOT IS RUNNING ---")
+        application.run_polling()
