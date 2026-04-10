@@ -107,7 +107,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20saya%20nak%20register%20%F0%9F%A5%B0%F0%9F%9A%80%F0%9F%92%B0"),
                 
                 # Link Telegram Admin
-                InlineKeyboardButton("🔵 Telegram Admin", url="https://t.me/GGWP888Admin")
+                InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
             [
                 InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")
@@ -115,8 +115,8 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ])
         
         await query.edit_message_text(
-            text="👑 **MENU PENDAFTARAN GGWP** 👑\n\n"
-                 "Sila pilih platform untuk daftar akaun, BOSSku!\n"
+            text="👑 **MENU REGISTER GGWP** 👑\n\n"
+                 "Sila pilih platform untuk JOIN akaun, BOSSku!\n"
                  "Amoi tunggu di sana ya! ❤️\n\n"
                  "─────────────────────",
             reply_markup=register_keyboard,
