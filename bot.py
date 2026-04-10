@@ -152,20 +152,25 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         game_list_text = (
             "👾🎮 **GGWP ROYAL CASINO GAME LIST** 🎮👾\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "🎰 Mega888 (🔥 *HOT*)\n"
-            "🎰 Pussy888 (🔥 *HOT*)\n"
-            "🎰 EVO888 (🔥 *HOT*)\n"
-            "🎰 918 Kiss ORI (🔥 *HOT*)\n\n"
-            "✨ 918 Kiss Kaya | LPE | Newtown | GreatWall | Live22 | Joker\n\n"
+            "🎰 **Mega888** (🔥 *HOT*)\n"
+            "🎰 **Pussy888** (🔥 *HOT*)\n"
+            "🎰 **EVO888** (🔥 *HOT*)\n"
+            "🎰 **918 Kiss ORI** (🔥 *HOT*)\n\n"
+            "✨ 918 Kiss Kaya\n"
+            "✨ LPE (Lucky Palace)\n"
+            "✨ Newtown\n"
+            "✨ GreatWall\n"
+            "✨ Live22\n"
+            "✨ Joker123\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "👑 *Pilih Game & Hantam Jackpot Sekarang!* 👑"
+            "👑 *Pilih Game & Mulai Bermain Sekarang!* 👑"
         )
         back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
 
     elif query.data == "show_links":
         links_text = (
-            "🎰 **LIST LINK GAME** 🎰\n"
+            "🎰 *GGWP LINK GAME* 🎰\n"
             "____________________________\n\n"
             "✨ **918KISS**\n"
             "Android & iOS: [KLIK SINI](https://yop1.918kiss.com/)\n"
