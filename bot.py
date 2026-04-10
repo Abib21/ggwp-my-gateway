@@ -9,7 +9,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # --- CONFIGURATION ---
 # Replace with your actual GGWP Token from BotFather
 BOT_TOKEN = "8297691834:AAE-5u3iHuHhKzFAStx0jsFlcErbNO0BT5U" 
-ADMIN_ID = 6949823483 # Your Admin ID
+ADMIN_ID = 5341486382 # Your Admin ID
 
 logging.basicConfig(level=logging.INFO)
 
