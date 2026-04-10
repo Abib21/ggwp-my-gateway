@@ -59,27 +59,30 @@ def get_greeting():
 
 def get_welcome_msg(first_name):
     greeting = get_greeting()
-    return (
-        "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n"
-        "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
-        "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
-        f"*{greeting}, BOSS {first_name.upper()}!* 👑🇲🇾\n"
-        "🎁 **PROMOSI KHAS MEMBER BARU**\n"
-        "┌───────────────────┐\n"
-        " 💵 **MIN DEPOSIT** ⇢ *RM20*\n"
-        " 💰 **CLAIM BONUS** ⇢ *27% EXTRA*\n"
-        " 💳 **METHOD** ⇢ *BANKIN / DUITNOW*\n"
-        "└───────────────────┘\n\n"
-        "⚠️ **TERMA & SYARAT BONUS**\n"
-        "🚫 *Dilarang bermain Live Game*\n"
-        "🚫 *Dilarang bermain Banned Games*\n"
-        "*(Jika langgar, kredit akan di-BURN!)*\n\n"
-        "⚡ **SERVICE STATUS**\n"
-        "🔹 **CUCI (WD)** ⇢ [ **PANTAS 3 MIN** ]\n"
-        "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPOSIT** ]\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "⬇️ **TEKAN DEKAT BAWAH** ⬇️"
+    return f"""🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆
+🎰 ✨ **GGWP MALAYSIA** ✨ 🎰
+🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆
+
+*{greeting}, BOSS {first_name.upper()}!* 👑 🇲🇾
+🎁 **PROMOSI KHAS MEMBER BARU**
+
+┌──────────────────────────┐
+  💵 **MIN DEPOSIT** ⇢ *RM20*
+  💰 **CLAIM BONUS** ⇢ *27% EXTRA*
+  💳 **METHOD** ⇢ *BANKIN / DUITNOW*
+└──────────────────────────┘
+
+⚠️ **TERMA & SYARAT BONUS**
+🚫 *Dilarang bermain Live Game*
+🚫 *Dilarang bermain Banned Games*
+‼️ **(Jika langgar, kredit akan di-BURN!)** ‼️
+
+⚡ **SERVICE STATUS**
+🔹 **CUCI (WD)** ⇢ 🟢 **PANTAS 3 MIN**
+🔹 **TNG E-WALLET** ⇢ ⚡ **AUTO DEPOSIT**
+━━━━━━━━━━━━━━━━━━━━━
+
+⬇️ **TEKAN DEKAT BAWAH** ⬇️"""
     )
 
 # --- HANDLERS ---
