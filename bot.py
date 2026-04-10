@@ -76,7 +76,7 @@ def get_welcome_msg(first_name):
         "*(Jika langgar, kredit akan di-BURN!)*\n\n"
         "⚡ **SERVICE STATUS**\n"
         "🔹 **CUCI (WD)** ⇢ [ **PANTAS 3 MIN** ]\n"
-        "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPO** ]\n"
+        "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPOSIT** ]\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
         "━━━━━━━━━━━━━━━━━━━━━\n\n"
         "⬇️ **TEKAN DEKAT BAWAH** ⬇️"
