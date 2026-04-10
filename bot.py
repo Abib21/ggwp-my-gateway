@@ -28,11 +28,11 @@ def get_main_keyboard():
     return InlineKeyboardMarkup([
         [
             InlineKeyboardButton("🆔 REGISTER", callback_data="show_register"),
-            InlineKeyboardButton("🚀 DEPOSIT", callback_data="show_deposit")
+            InlineKeyboardButton("🚀 TTERIMA DEPOSIT", callback_data="show_deposit")
         ],
         [
             InlineKeyboardButton("🎁 CLAIM BONUS 27%", callback_data="show_bonus"),
-            InlineKeyboardButton("💰 PROMO LAIN", callback_data="show_all_promos")
+            InlineKeyboardButton("💰 PROMOTION", callback_data="show_all_promos")
         ],
         [
             InlineKeyboardButton("🎰 GAME LIST", callback_data="show_game_list"),
