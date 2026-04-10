@@ -50,20 +50,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # 4. Keyboard Setup
     keyboard = [
         [
-            InlineKeyboardButton("🆕 Daftar Akaun", url="https://ggwp.com/register"),
-            InlineKeyboardButton("🔐 Login Masuk", url="https://ggwp.com/login")
+            InlineKeyboardButton("🆔 Register", url="https://ggwp.com/register"),
+            InlineKeyboardButton("🚀 Terima deposit", url="https://ggwp.com/login")
         ],
         [
             InlineKeyboardButton("🎁 Claim Bonus 27%", url="https://ggwp.com/promosi"),
-            InlineKeyboardButton("📘 Panduan Depo TNG", url="https://ggwp.com/guide")
+            InlineKeyboardButton("💰 Bonus Tersedia", url="https://ggwp.com/guide")
         ],
         [
-            InlineKeyboardButton("🎰 Game Gacor (Signal)", url="https://t.me/GGWP_Signal"),
+            InlineKeyboardButton("🎰 List Game", url="https://t.me/GGWP_Signal"),
             InlineKeyboardButton("📢 Channel Bukti Cuci", url="https://t.me/ggwp888channel")
         ],
         [
-            InlineKeyboardButton("💬 LiveChat / WhatsApp", url="https://ggwp.com/support"),
-            InlineKeyboardButton("🆘 Bantuan Bot", url="https://t.me/GGWP_Support")
+            InlineKeyboardButton("💬 Chat Amoi Sini", url="https://ggwp.com/support"),
+            InlineKeyboardButton("🎮 Link Game", url="https://t.me/GGWP_Support")
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -91,7 +91,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "━━━━━━━━━━━━━━━━━━━━━\n"
         "✨ *Main Sini, Confirm Cuci* ✨\n"
         "━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
     )
 
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='Markdown')
