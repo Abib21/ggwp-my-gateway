@@ -17,11 +17,11 @@ logging.basicConfig(level=logging.INFO)
 conn = sqlite3.connect("ggwp_my.db", check_same_thread=False)
 cursor = conn.cursor()
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS users (
-    user_id INTEGER PRIMARY KEY,
-    referrer INTEGER
-)
-""")
+    CREATE TABLE IF NOT EXISTS users (
+        user_id INTEGER PRIMARY KEY,
+        referrer INTEGER
+    )
+    """)
 conn.commit()
 
 # --- HANDLERS ---
