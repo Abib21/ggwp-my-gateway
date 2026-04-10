@@ -31,7 +31,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = user.id
 
     # 1. Get Malaysia Time (MYT)
-    my_tz = pytz.timezone('Asia/Kuala Lumpur')
+    my_tz = pytz.timezone('Asia/Kuala_Lumpur')
     my_time = datetime.now(my_tz).hour
 
     # 2. Local Greeting Logic (Bahasa Melayu)
