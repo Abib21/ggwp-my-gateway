@@ -232,34 +232,35 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     elif query.data == "show_banned_games":
-    banned_text = (
-        "❌ **LIST BANNED GAMES** ❌\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "⚜️ **918KISS / MEGA888 / 918KAYA**\n"
-        "🙅 King Derby\n"
-        "🙅 Thunderbolt\n"
-        "🙅 Motorbike\n"
-        "🙅 Roulette\n"
-        "🙅 Seaworld\n\n"
-        "⚜️ **XE88**\n"
-        "🙅 Daily Job Mission\n"
-        "🙅 King Derby\n"
-        "🙅 Thunderbolt\n"
-        "🙅 Motorbike\n"
-        "🙅 Roulette\n"
-        "🙅 MysteryBox\n\n"
-        "⚜️ **PUSSY888**\n"
-        "🙅 All Game 4D\n"
-        "🙅 King Derby\n"
-        "🙅 Thunderbolt\n"
-        "🙅 Motorbike\n"
-        "🙅 Seaworld\n\n"
-        "⚜️ **JOKER**\n"
-        "🙅 Powerbar\n\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-    )
-    keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
-    await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
+        banned_text = (
+            "❌ **LIST BANNED GAMES** ❌\n"
+            "━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "⚜️ **918KISS / MEGA888 / 918KAYA**\n"
+            "🙅 King Derby\n"
+            "🙅 Thunderbolt\n"
+            "🙅 Motorbike\n"
+            "🙅 Roulette\n"
+            "🙅 Seaworld\n\n"
+            "⚜️ **XE88**\n"
+            "🙅 Daily Job Mission\n"
+            "🙅 King Derby\n"
+            "🙅 Thunderbolt\n"
+            "🙅 Motorbike\n"
+            "🙅 Roulette\n"
+            "🙅 MysteryBox\n\n"
+            "⚜️ **PUSSY888**\n"
+            "🙅 All Game 4D\n"
+            "🙅 King Derby\n"
+            "🙅 Thunderbolt\n"
+            "🙅 Motorbike\n"
+            "🙅 Seaworld\n\n"
+            "⚜️ **JOKER**\n"
+            "🙅 Powerbar\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━\n"
+            "⚠️ *Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!*"
+        )
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+        await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
 
     elif query.data == "back_to_main":
         user = update.effective_user
