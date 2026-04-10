@@ -166,14 +166,42 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "show_links":
         links_text = (
             "🎰 **LIST LINK GAME** 🎰\n"
-            "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "✨ **918KISS / MEGA888 / PUSSY888 / JOKER**\n"
-            "Semua link download tersedia di portal utama kami.\n"
-            "─────────────────────\n"
-            "⚠️ *Gunakan browser Chrome/Safari untuk download stabil.*"
+            "____________________________\n\n"
+            "✨ **918KISS**\n"
+            "Android & iOS: [KLIK SINI](https://yop1.918kiss.com/)\n"
+            "____________________________\n"
+            "✨ **MEGA888**\n"
+            "Android & iOS: [KLIK SINI](https://m.mega166.com/mega/index.html)\n"
+            "____________________________\n"
+            "✨ **PUSSY888**\n"
+            "Android & iOS: [KLIK SINI](https://ytl.pussy888.com/)\n"
+            "____________________________\n"
+            "✨ **LIVE22**\n"
+            "Android: [KLIK SINI](https://live22474.com/Login)\n"
+            "iOS: [KLIK SINI](https://botanica22.com/Login)\n"
+            "____________________________\n"
+            "✨ **918KAYA**\n"
+            "Android & iOS: [KLIK SINI](http://download22.da31889.com/)\n"
+            "____________________________\n"
+            "✨ **JOKER**\n"
+            "Android & iOS: [KLIK SINI](https://www.jokerapp888a.net/)\n"
+            "____________________________\n"
+            "✨ **NEWTOWN CASINO**\n"
+            "Android: [KLIK SINI](https://cdn.newmax11.com/mobile.html)\n"
+            "iOS: [KLIK SINI](https://www.nbig33.com/)\n"
+            "____________________________\n"
+            "✨ **EVO888**\n"
+            "Android & iOS: [KLIK SINI](https://d.evo366.com/)\n\n"
+            "____________________________\n"
+            "⬅️ *Tekan butang di bawah untuk kembali*"
         )
         back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=links_text, reply_markup=back_keyboard, parse_mode='Markdown', disable_web_page_preview=True)
+        await query.edit_message_text(
+            text=links_text, 
+            reply_markup=back_keyboard, 
+            parse_mode='Markdown', 
+            disable_web_page_preview=True
+        )
 
     elif query.data == "show_banned_games":
         banned_text = (
