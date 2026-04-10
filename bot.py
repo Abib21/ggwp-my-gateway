@@ -70,25 +70,52 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     # 5. Welcome Message (Gold & Luxury Vibe)
-    welcome_msg = (
+welcome_msg = (
+
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n"
+
         "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
+
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
+
         f"*{greeting}, BOSS {user.first_name.upper()}!* 👑🇲🇾\n"
+
         "Selamat datang ke platform paling 'steady' di Malaysia.\n\n"
-        "💎 **KELEBIHAN MEMBER GGWP**\n"
+
+        "🎁 **PROMOSI KHAS MEMBER BARU**\n"
+
         "┌───────────────────┐\n"
-        " 💵 **MIN DEPOSIT** ⇢ *RM10*\n"
-        " ⚡ **CUCI (WD)** ⇢ *PANTAS (2 MIN)*\n"
-        " 🎁 **DAILY ANGPOW** ⇢ *TERSEDIA*\n"
+
+        " 💵 **MIN DEPOSIT** ⇢ *RM20*\n"
+
+        " 💰 **CLAIM BONUS** ⇢ *27% EXTRA*\n"
+
+        " 💳 **METHOD** ⇢ *BANKIN / DUITNOW*\n"
+
         "└───────────────────┘\n\n"
-        "💳 **SISTEM PEMBAYARAN**\n"
-        "🚀 *TNG E-WALLET* ⇢ [ **AUTO** ]\n"
-        "🪙 *DUITNOW / BANK* ⇢ [ **FAST** ]\n"
+
+        "⚠️ **TERMA & SYARAT BONUS**\n"
+
+        "🚫 *Dilarang bermain Live Game*\n"
+
+        "🚫 *Dilarang bermain Banned Games*\n"
+
+        "*(Jika langgar, kredit akan di-BURN!)*\n\n"
+
+        "⚡ **SERVICE STATUS**\n"
+
+        "🔹 **CUCI (WD)** ⇢ [ **PANTAS 3 MIN** ]\n"
+
+        "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPO** ]\n"
+
         "━━━━━━━━━━━━━━━━━━━━━\n"
-        "✨ *Main Sini, Cuci Sini! Confirm Gacor.* ✨\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
+
+        "✨ *Main Sini, Confirm Cuci* ✨\n"
+
+        "━━━━━━━━━━━━━━━━━━━━━\n\n"
+
         "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
+
     )
 
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='Markdown')
