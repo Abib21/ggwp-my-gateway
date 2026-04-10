@@ -78,7 +78,6 @@ def get_welcome_msg(first_name):
 🔹 **TNG E-WALLET** ⇢ ⚡ **AUTO DEPOSIT**
 ━━━━━━━━━━━━━━━━━━━━━
 ⬇️ **TEKAN DEKAT BAWAH** ⬇️"""
-    )
 
 # --- HANDLERS ---
 
