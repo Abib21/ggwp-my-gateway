@@ -7,7 +7,6 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # --- CONFIGURATION ---
-# Replace with your actual GGWP Token from BotFather
 BOT_TOKEN = "8297691834:AAE-5u3iHuHhKzFAStx0jsFlcErbNO0BT5U" 
 ADMIN_ID = 5341486382 # Your Admin ID
 
@@ -34,7 +33,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     my_tz = pytz.timezone('Asia/Kuala_Lumpur')
     my_time = datetime.now(my_tz).hour
 
-    # 2. Local Greeting Logic (Bahasa Melayu)
+    # 2. Local Greeting Logic
     if 5 <= my_time < 12:
         greeting = "Selamat Pagi"
     elif 12 <= my_time < 18:
@@ -48,19 +47,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         cursor.execute("INSERT INTO users (user_id) VALUES (?)", (user_id,))
         conn.commit()
 
-    # 4. Keyboard Setup (Specialized for Malaysia Market)
+    # 4. Keyboard Setup
     keyboard = [
         [
             InlineKeyboardButton("🆕 Daftar Akaun", url="https://ggwp.com/register"),
             InlineKeyboardButton("🔐 Login Masuk", url="https://ggwp.com/login")
         ],
         [
-            InlineKeyboardButton("🎁 Claim Bonus RM5", url="https://ggwp.com/promosi"),
+            InlineKeyboardButton("🎁 Claim Bonus 27%", url="https://ggwp.com/promosi"),
             InlineKeyboardButton("📘 Panduan Depo TNG", url="https://ggwp.com/guide")
         ],
         [
             InlineKeyboardButton("🎰 Game Gacor (Signal)", url="https://t.me/GGWP_Signal"),
-            InlineKeyboardButton("📢 Channel Bukti cuci", url="https://t.me/ggwp888channel")
+            InlineKeyboardButton("📢 Channel Bukti Cuci", url="https://t.me/ggwp888channel")
         ],
         [
             InlineKeyboardButton("💬 LiveChat / WhatsApp", url="https://ggwp.com/support"),
@@ -69,53 +68,30 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    # 5. Welcome Message (Gold & Luxury Vibe)
-welcome_msg = (
-
+    # 5. Welcome Message (Sudah diperbaiki indentasinya)
+    welcome_msg = (
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n"
-
         "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
-
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
-
         f"*{greeting}, BOSS {user.first_name.upper()}!* 👑🇲🇾\n"
-
         "Selamat datang ke platform paling 'steady' di Malaysia.\n\n"
-
         "🎁 **PROMOSI KHAS MEMBER BARU**\n"
-
         "┌───────────────────┐\n"
-
         " 💵 **MIN DEPOSIT** ⇢ *RM20*\n"
-
         " 💰 **CLAIM BONUS** ⇢ *27% EXTRA*\n"
-
         " 💳 **METHOD** ⇢ *BANKIN / DUITNOW*\n"
-
         "└───────────────────┘\n\n"
-
         "⚠️ **TERMA & SYARAT BONUS**\n"
-
         "🚫 *Dilarang bermain Live Game*\n"
-
         "🚫 *Dilarang bermain Banned Games*\n"
-
         "*(Jika langgar, kredit akan di-BURN!)*\n\n"
-
         "⚡ **SERVICE STATUS**\n"
-
         "🔹 **CUCI (WD)** ⇢ [ **PANTAS 3 MIN** ]\n"
-
         "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPO** ]\n"
-
         "━━━━━━━━━━━━━━━━━━━━━\n"
-
         "✨ *Main Sini, Confirm Cuci* ✨\n"
-
         "━━━━━━━━━━━━━━━━━━━━━\n\n"
-
         "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
-
     )
 
     await update.message.reply_text(welcome_msg, reply_markup=reply_markup, parse_mode='Markdown')
