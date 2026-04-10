@@ -103,7 +103,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "show_register":
         register_keyboard = InlineKeyboardMarkup([
             [
-                InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20saya%20nak%20register"),
+                # Link WhatsApp dengan pesan otomatis pilihanmu
+                InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20saya%20nak%20register%20%F0%9F%A5%B0%F0%9F%9A%80%F0%9F%92%B0"),
+                
+                # Link Telegram Admin
                 InlineKeyboardButton("🔵 Telegram Admin", url="https://t.me/GGWP888Admin")
             ],
             [
