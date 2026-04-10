@@ -64,7 +64,6 @@ def get_welcome_msg(first_name):
         "🎰 ✨ **GGWP MALAYSIA** ✨ 🎰\n"
         "🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n\n"
         f"*{greeting}, BOSS {first_name.upper()}!* 👑🇲🇾\n"
-        "Selamat datang ke platform paling 'steady' di Malaysia.\n\n"
         "🎁 **PROMOSI KHAS MEMBER BARU**\n"
         "┌───────────────────┐\n"
         " 💵 **MIN DEPOSIT** ⇢ *RM20*\n"
@@ -109,7 +108,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20saya%20nak%20register%20%F0%9F%A5%B0%F0%9F%9A%80%F0%9F%92%B0"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
+            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
         ])
         await query.edit_message_text(
             text="👑 **Join GGWP** 👑\n\nPilih platform untuk Join, Bossku!",
@@ -123,7 +122,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
+            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
         ])
         await query.edit_message_text(
             text="💬 **HUBUNGI AMOI GGWP** 💬\n\nSila pilih platform untuk chat dengan kami!",
@@ -149,7 +148,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "👑 *Pilih Game & Mulai Bermain Sekarang!* 👑"
         )
-        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
+        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
 
     elif query.data == "show_bonus":
@@ -158,7 +157,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20nak%20claim%20bonus%2027%25%20%F0%9F%A5%B0%F0%9F%8E%81%F0%9F%92%B0"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]
+            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
         ])
         await query.edit_message_text(
             text="🎁 **CLAIM BONUS 27%** 🎁\n\nHubungi kami untuk claim bonus anda!",
@@ -177,7 +176,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "✨ *Main secara rasmi untuk nikmati semua kelebihan ini!* ✨"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=promo_text, reply_markup=keyboard, parse_mode='Markdown')
 
     elif query.data == "show_deposit":
@@ -196,7 +195,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "👇 *Sila hubungi Admin untuk nombor akaun!*"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=deposit_text, reply_markup=keyboard, parse_mode='Markdown')
 
     elif query.data == "show_links":
@@ -223,7 +222,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Android & iOS: [KLIK SINI](https://d.evo366.com/)\n\n"
             "━━━━━━━━━━━━━━━━━━━━━"
         )
-        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
+        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(
             text=links_text,
             reply_markup=back_keyboard,
@@ -259,7 +258,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "⚠️ *Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!*"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
 
     elif query.data == "back_to_main":
