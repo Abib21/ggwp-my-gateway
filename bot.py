@@ -28,7 +28,7 @@ def get_main_keyboard():
     return InlineKeyboardMarkup([
         [
             InlineKeyboardButton("🆔 REGISTER", callback_data="show_register"),
-            InlineKeyboardButton("🚀 TTERIMA DEPOSIT", callback_data="show_deposit")
+            InlineKeyboardButton("🚀 TERIMA DEPOSIT", callback_data="show_deposit")
         ],
         [
             InlineKeyboardButton("🎁 CLAIM BONUS 27%", callback_data="show_bonus"),
