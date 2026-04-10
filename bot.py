@@ -79,9 +79,8 @@ def get_welcome_msg(first_name):
         "🔹 **CUCI (WD)** ⇢ [ **PANTAS 3 MIN** ]\n"
         "🔹 **TNG E-WALLET** ⇢ [ **AUTO DEPO** ]\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
-        "✨ *Lubuk Cuci Bossku, Gerenti Jackpot!* ✨\n"
         "━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "⬇️ **TEKAN BUTANG DI BAWAH** ⬇️"
+        "⬇️ **TEKAN DEKAT BAWAH** ⬇️"
     )
 
 # --- HANDLERS ---
@@ -136,12 +135,11 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         game_list_text = (
             "👾🎮 **GGWP ROYAL CASINO GAME LIST** 🎮👾\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "🔥 **TOP GACOR HARI INI:**\n"
+            
             "🎰 **Mega888** 🔥 *HOT*\n"
             "🎰 **Pussy888** 🔥 *HOT*\n"
             "🎰 **EVO888** 🔥 *HOT*\n"
             "🎰 **918 Kiss ORI** 🔥 *HOT*\n\n"
-            "💎 **POPULAR GAMES:**\n"
             "✨ 918 Kiss Kaya\n"
             "✨ LPE (Lucky Palace)\n"
             "✨ Newtown\n"
@@ -149,7 +147,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "✨ Live22\n"
             "✨ Joker123\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "👑 *Pilih Game & Hantam Jackpot Sekarang!* 👑"
+            "👑 *Pilih Game & Mulai Bermain Sekarang!* 👑"
         )
         back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali Menu Utama", callback_data="back_to_main")]])
         await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
@@ -234,20 +232,34 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     elif query.data == "show_banned_games":
-        banned_text = (
-            "❌ **LIST BANNED GAMES** ❌\n"
-            "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "🚫 *Game-game berikut TIDAK layak untuk bonus:*\n\n"
-            "❌ Semua Live Casino Games\n"
-            "❌ Baccarat\n"
-            "❌ Roulette\n"
-            "❌ Blackjack\n"
-            "❌ Dragon Tiger\n\n"
-            "━━━━━━━━━━━━━━━━━━━━━\n"
-            "⚠️ *Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!*"
-        )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
-        await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
+    banned_text = (
+        "❌ **LIST BANNED GAMES** ❌\n"
+        "━━━━━━━━━━━━━━━━━━━━━\n\n"
+        "⚜️ **918KISS / MEGA888 / 918KAYA**\n"
+        "🙅 King Derby\n"
+        "🙅 Thunderbolt\n"
+        "🙅 Motorbike\n"
+        "🙅 Roulette\n"
+        "🙅 Seaworld\n\n"
+        "⚜️ **XE88**\n"
+        "🙅 Daily Job Mission\n"
+        "🙅 King Derby\n"
+        "🙅 Thunderbolt\n"
+        "🙅 Motorbike\n"
+        "🙅 Roulette\n"
+        "🙅 MysteryBox\n\n"
+        "⚜️ **PUSSY888**\n"
+        "🙅 All Game 4D\n"
+        "🙅 King Derby\n"
+        "🙅 Thunderbolt\n"
+        "🙅 Motorbike\n"
+        "🙅 Seaworld\n\n"
+        "⚜️ **JOKER**\n"
+        "🙅 Powerbar\n\n"
+        "━━━━━━━━━━━━━━━━━━━━━\n"
+    )
+    keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Kembali", callback_data="back_to_main")]])
+    await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
 
     elif query.data == "back_to_main":
         user = update.effective_user
