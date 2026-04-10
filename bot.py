@@ -27,7 +27,7 @@ conn.commit()
 def get_main_keyboard():
     return InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("🆔 Register Akaun", callback_data="show_register"),
+            InlineKeyboardButton("🆔 Register", callback_data="show_register"),
             InlineKeyboardButton("🚀 Terima Deposit", callback_data="show_deposit")
         ],
         [
