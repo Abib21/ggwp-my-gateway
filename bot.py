@@ -17,7 +17,7 @@ from telegram.ext import (
 # =============================================================================
 BOT_TOKEN  = "8297691834:AAE-5u3iHuHhKzFAStx0jsFlcErbNO0BT5U"
 ADMIN_ID   = 5341486382
-GROUP_ID   = "-5299802622"  # GGWP Staff Notification Group
+GROUP_ID   = "-1003915138351"  # GGWP Staff Notification Group
 CHANNEL_ID = None           # Isi jika ada channel, contoh: "-1001234567890"
 
 # =============================================================================
@@ -52,26 +52,26 @@ conn.commit()
 def get_main_keyboard():
     return InlineKeyboardMarkup([
         [
-            InlineKeyboardButton("🆔 REGISTER",            callback_data="show_register"),
-            InlineKeyboardButton("🚀 TERIMA DEPOSIT",      callback_data="show_deposit")
+            InlineKeyboardButton("✅ DAFTAR SEKARANG",      callback_data="show_register"),
+            InlineKeyboardButton("💳 BUAT DEPOSIT",         callback_data="show_deposit")
         ],
         [
-            InlineKeyboardButton("🎁 CLAIM BONUS 27%",     callback_data="show_bonus"),
-            InlineKeyboardButton("💰 PROMOTION",            callback_data="show_all_promos")
+            InlineKeyboardButton("🎁 TUNTUT BONUS 27%",    callback_data="show_bonus"),
+            InlineKeyboardButton("🎊 SEMUA PROMOSI",        callback_data="show_all_promos")
         ],
         [
-            InlineKeyboardButton("🎰 GAME LIST",           callback_data="show_game_list"),
-            InlineKeyboardButton("🎮 LINK GAME",            callback_data="show_links")
+            InlineKeyboardButton("🎰 SENARAI GAME",        callback_data="show_game_list"),
+            InlineKeyboardButton("🔗 MUAT TURUN GAME",      callback_data="show_links")
         ],
         [
-            InlineKeyboardButton("💬 CHAT AMOI",           callback_data="show_chat_options"),
-            InlineKeyboardButton("📢 BUKTI CUCI",           url="https://t.me/ggwp888channel")
+            InlineKeyboardButton("💬 HUBUNGI KAMI",        callback_data="show_chat_options"),
+            InlineKeyboardButton("🏆 BUKTI MENANG",         url="https://t.me/ggwp888channel")
         ],
         [
-            InlineKeyboardButton("💰 MAX/LIMIT CUCI",      callback_data="show_max_cuci")
+            InlineKeyboardButton("💰 HAD PENGELUARAN",     callback_data="show_max_cuci")
         ],
         [
-            InlineKeyboardButton("❌ LIST BANNED GAME ❌",  callback_data="show_banned_games")
+            InlineKeyboardButton("🚫 SENARAI GAME LARANGAN 🚫", callback_data="show_banned_games")
         ]
     ])
 
@@ -145,31 +145,26 @@ def get_my_time() -> datetime:
     return datetime.now(pytz.timezone('Asia/Kuala_Lumpur'))
 
 async def post_join_announcement(bot, display_name: str, phone_no: str, now: datetime):
-    # FEATURE: Format masa join yang lebih lengkap dan cantik untuk staff group
-    day_names = {
-        "Monday": "Isnin", "Tuesday": "Selasa", "Wednesday": "Rabu",
-        "Thursday": "Khamis", "Friday": "Jumaat",
-        "Saturday": "Sabtu", "Sunday": "Ahad"
-    }
-    day_en   = now.strftime("%A")
-    day_my   = day_names.get(day_en, day_en)
-    date_str = now.strftime("%d/%m/%Y")
-    time_str = now.strftime("%I:%M %p")   # contoh: 02:35 PM
+    """Hantar notifikasi join ke Staff Group dan/atau Channel."""
+    date_str = now.strftime('%Y-%m-%d')
+    time_str = now.strftime('%H:%M')
+
+    # Dapatkan jumlah total member dari database
+    cursor.execute("SELECT COUNT(*) FROM users")
+    total = cursor.fetchone()[0]
 
     announcement = (
-        "🔔 *MEMBER BARU GGWP* 🔔\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-        f"👤 *Nama:* {display_name}\n"
-        f"📞 *No. HP:* `{phone_no}`\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-        f"📅 *Tarikh:* {day_my}, {date_str}\n"
-        f"🕐 *Masa:* {time_str} (WIB/MYT)\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-        "✅ _Sila follow up dengan member baru ini!_"
+        f"🔔 *NEW MEMBER GGWP* 🔔\n\n"
+        f"👤 {display_name}\n"
+        f"📞 {phone_no}\n"
+        f"📅 {date_str}  🕐 {time_str}\n"
+        f"🚀 Baru saja bergabung di GGWP!\n\n"
+        f"👥 *{total} orang telah join GGWP!*"
     )
 
     for chat_id, label in [(CHANNEL_ID, "Channel"), (GROUP_ID, "Staff Group")]:
         if not chat_id:
+            logger.info(f"⏭️ {label} tidak dikonfigurasi, skip.")
             continue
         try:
             await bot.send_message(
@@ -179,7 +174,8 @@ async def post_join_announcement(bot, display_name: str, phone_no: str, now: dat
             )
             logger.info(f"✅ Announcement dihantar ke {label} ({chat_id})")
         except Exception as e:
-            logger.warning(f"⚠️ Gagal hantar ke {label} ({chat_id}): {e}")
+            # Log error penuh supaya mudah debug
+            logger.error(f"❌ GAGAL hantar ke {label} (chat_id={chat_id}): {type(e).__name__}: {e}")
 
 # =============================================================================
 # HANDLERS
