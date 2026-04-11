@@ -68,7 +68,7 @@ def get_main_keyboard():
             InlineKeyboardButton("🏆 BUKTI MENANG",         url="https://t.me/ggwp888channel")
         ],
         [
-            InlineKeyboardButton("💰 HAD PENGELUARAN",     callback_data="show_max_cuci")
+            InlineKeyboardButton("💰 Max/Limit Cuci",     callback_data="show_max_cuci")
         ],
         [
             InlineKeyboardButton("🚫 SENARAI GAME LARANGAN 🚫", callback_data="show_banned_games")
