@@ -62,28 +62,32 @@ def get_welcome_msg(first_name):
     return f"""🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆
 🎰 ✨ **GGWP MALAYSIA** ✨ 🎰
 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆 🏆
+
 *{greeting}, BOSS {first_name.upper()}!* 👑 🇲🇾
 🎁 **PROMOSI KHAS MEMBER BARU**
+
 ┌──────────────────────────┐
   💵 **MIN DEPOSIT** ⇢ *RM20*
   💰 **CLAIM BONUS** ⇢ *27% EXTRA*
   💳 **METHOD** ⇢ *BANKIN / DUITNOW*
 └──────────────────────────┘
+
 ⚠️ **TERMA & SYARAT BONUS**
 🚫 *Dilarang bermain Live Game*
 🚫 *Dilarang bermain Banned Games*
 ‼️ **(Jika langgar, kredit akan di-BURN!)** ‼️
+
 ⚡ **SERVICE STATUS**
 🔹 **CUCI (WD)** ⇢ 🟢 **PANTAS 3 MIN**
 🔹 **TNG E-WALLET** ⇢ ⚡ **AUTO DEPOSIT**
 ━━━━━━━━━━━━━━━━━━━━━
+
 ⬇️ **TEKAN DEKAT BAWAH** ⬇️"""
 
 # --- HANDLERS ---
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-
     cursor.execute("SELECT user_id FROM users WHERE user_id=?", (user.id,))
     if not cursor.fetchone():
         cursor.execute("INSERT INTO users (user_id) VALUES (?)", (user.id,))
@@ -98,6 +102,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
+    
+    # MENGHAPUS PESAN LAMA AGAR MENU BARU MUNCUL DI PALING BAWAH
+    try:
+        await query.delete_message()
+    except Exception as e:
+        logging.error(f"Error deleting message: {e}")
+
+    back_button = InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")
 
     if query.data == "show_register":
         keyboard = InlineKeyboardMarkup([
@@ -105,9 +117,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20saya%20nak%20register%20%F0%9F%A5%B0%F0%9F%9A%80%F0%9F%92%B0"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
+            [back_button]
         ])
-        await query.edit_message_text(
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
             text="👑 **Join GGWP** 👑\n\nPilih platform untuk Join, Bossku!",
             reply_markup=keyboard,
             parse_mode='Markdown'
@@ -119,9 +132,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
+            [back_button]
         ])
-        await query.edit_message_text(
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
             text="💬 **HUBUNGI AMOI GGWP** 💬\n\nSila pilih platform untuk chat dengan kami!",
             reply_markup=keyboard,
             parse_mode='Markdown'
@@ -131,7 +145,6 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         game_list_text = (
             "👾🎮 **GGWP ROYAL CASINO GAME LIST** 🎮👾\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
-            
             "🎰 **Mega888** 🔥 *HOT*\n"
             "🎰 **Pussy888** 🔥 *HOT*\n"
             "🎰 **EVO888** 🔥 *HOT*\n"
@@ -145,8 +158,12 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "👑 *Pilih Game & Mulai Bermain Sekarang!* 👑"
         )
-        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=game_list_text, reply_markup=back_keyboard, parse_mode='Markdown')
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
+            text=game_list_text, 
+            reply_markup=InlineKeyboardMarkup([[back_button]]), 
+            parse_mode='Markdown'
+        )
 
     elif query.data == "show_bonus":
         keyboard = InlineKeyboardMarkup([
@@ -154,9 +171,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 InlineKeyboardButton("🟢 WhatsApp Amoi", url="https://wa.me/60195472739?text=Amoi%20nak%20claim%20bonus%2027%25%20%F0%9F%A5%B0%F0%9F%8E%81%F0%9F%92%B0"),
                 InlineKeyboardButton("🔵 Telegram Amoi", url="https://t.me/GGWP888Admin")
             ],
-            [InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]
+            [back_button]
         ])
-        await query.edit_message_text(
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
             text="🎁 **CLAIM BONUS 27%** 🎁\n\nHubungi kami untuk claim bonus anda!",
             reply_markup=keyboard,
             parse_mode='Markdown'
@@ -173,8 +191,12 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "✨ *Main secara rasmi untuk nikmati semua kelebihan ini!* ✨"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=promo_text, reply_markup=keyboard, parse_mode='Markdown')
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
+            text=promo_text, 
+            reply_markup=InlineKeyboardMarkup([[back_button]]), 
+            parse_mode='Markdown'
+        )
 
     elif query.data == "show_deposit":
         deposit_text = (
@@ -192,8 +214,12 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "👇 *Sila hubungi Admin untuk nombor akaun!*"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=deposit_text, reply_markup=keyboard, parse_mode='Markdown')
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
+            text=deposit_text, 
+            reply_markup=InlineKeyboardMarkup([[back_button]]), 
+            parse_mode='Markdown'
+        )
 
     elif query.data == "show_links":
         links_text = (
@@ -219,10 +245,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Android & iOS: [KLIK SINI](https://d.evo366.com/)\n\n"
             "━━━━━━━━━━━━━━━━━━━━━"
         )
-        back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
             text=links_text,
-            reply_markup=back_keyboard,
+            reply_markup=InlineKeyboardMarkup([[back_button]]),
             parse_mode='Markdown',
             disable_web_page_preview=True
         )
@@ -232,35 +258,30 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "❌ **LIST BANNED GAMES** ❌\n"
             "━━━━━━━━━━━━━━━━━━━━━\n\n"
             "⚜️ **918KISS / MEGA888 / 918KAYA**\n"
-            "🙅 King Derby\n"
-            "🙅 Thunderbolt\n"
-            "🙅 Motorbike\n"
-            "🙅 Roulette\n"
-            "🙅 Seaworld\n\n"
+            "🙅 King Derby | Thunderbolt | Motorbike\n"
+            "🙅 Roulette | Seaworld\n\n"
             "⚜️ **XE88**\n"
-            "🙅 Daily Job Mission\n"
-            "🙅 King Derby\n"
-            "🙅 Thunderbolt\n"
-            "🙅 Motorbike\n"
-            "🙅 Roulette\n"
-            "🙅 MysteryBox\n\n"
+            "🙅 Daily Job | King Derby | Thunderbolt\n"
+            "🙅 Motorbike | Roulette | MysteryBox\n\n"
             "⚜️ **PUSSY888**\n"
-            "🙅 All Game 4D\n"
-            "🙅 King Derby\n"
-            "🙅 Thunderbolt\n"
-            "🙅 Motorbike\n"
-            "🙅 Seaworld\n\n"
+            "🙅 All Game 4D | King Derby | Thunderbolt\n"
+            "🙅 Motorbike | Seaworld\n\n"
             "⚜️ **JOKER**\n"
             "🙅 Powerbar\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
             "⚠️ *Game di atas tidak di benarkan untuk bermain, jika di dapati maka point akan burn*"
         )
-        keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Laman Utama", callback_data="back_to_main")]])
-        await query.edit_message_text(text=banned_text, reply_markup=keyboard, parse_mode='Markdown')
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
+            text=banned_text, 
+            reply_markup=InlineKeyboardMarkup([[back_button]]), 
+            parse_mode='Markdown'
+        )
 
     elif query.data == "back_to_main":
         user = update.effective_user
-        await query.edit_message_text(
+        await context.bot.send_message(
+            chat_id=query.message.chat_id,
             text=get_welcome_msg(user.first_name),
             reply_markup=get_main_keyboard(),
             parse_mode='Markdown'
