@@ -521,7 +521,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "⚜️ *JOKER*\n"
             "🙅 Powerbar\n\n"
             "━━━━━━━━━━━━━━━━━━━━━\n"
-            "⚠️ _Jika bermain game di atas semasa ada bonus aktif, kredit akan di-BURN!_"
+            "⚠️ _Tidak di benarkan bermain game di atas, jika di dapati maka kredit akan di-BURN!_"
         )
         await context.bot.send_message(
             chat_id=chat_id,
